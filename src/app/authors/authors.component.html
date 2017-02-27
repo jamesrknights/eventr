@@ -1,0 +1,7 @@
+<h1 [textContent]="title"></h1>
+<p [textContent]="name"></p>
+    <input type="text" [value]="title" [(ngModel)]="title" autoGrow />
+    <button commonButton>Button</button>
+    <ul>
+        <li *ngFor="let author of authors" [textContent]="author"></li>
+    </ul>

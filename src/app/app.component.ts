@@ -1,10 +1,22 @@
 import { Component } from '@angular/core';
+import { HelperService } from './common/util/helper.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'narratones',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+
+  private helper : HelperService;
+
+  constructor () {}
+  
+
+  title: string = 'Hello Angular';
+  name: string = "This is the name"
+  isActive = false;
+
+  
+
 }
