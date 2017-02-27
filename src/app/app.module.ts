@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Common Components
 
@@ -45,7 +46,8 @@ import { AutoGrowDirective } from './directives/auto-grow.directive';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    NgbModule.forRoot()
   ],
   providers: [
 
@@ -57,6 +59,6 @@ import { AutoGrowDirective } from './directives/auto-grow.directive';
     AuthorsService 
 
    ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, CoursesComponent]
 })
 export class AppModule { }
