@@ -1,13 +1,9 @@
 import { Directive, ElementRef, Renderer } from '@angular/core';
-import { HelperService } from '../util/helper.service';
+import { HelperService } from '../services/helper.service';
 
 @Directive({
     selector: '[commonButton]',
-    host: {
-        '(click)' : 'onClick($event)',
-        '(focus)' : 'onFocus($event)',
-        '(blur)' : 'onBlur($event)'
-    }
+   
 })
 export class ButtonDirective {
 
@@ -16,7 +12,7 @@ export class ButtonDirective {
     constructor (private el : ElementRef, private renderer : Renderer, private helper : HelperService) {}
 
     onClick ($event) {
-        
+
         if (this.helper.isNotNull($event)) {
             console.log("Common Button Clicked");
             this.renderer.setElementClass(this.el.nativeElement, "active", true);

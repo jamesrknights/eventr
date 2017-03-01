@@ -6,21 +6,25 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Common Components
+import { FavouriteComponent } from './common/components/favourite.component'
 
 // Common Providers
-import { HelperService } from './common/util/helper.service';
+import { HelperService } from './common/services/helper.service';
 
 // Common Directive 
 import { ButtonDirective } from './common/directives/button.directive';
+import { FavouriteDirective } from './common/directives/favourite.directive';
 
 // Application Components
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './courses/courses.component';
 import { AuthorsComponent } from './authors/authors.component';
 
+// Application Models
+import { AuthorsModel } from './authors/models/authors.model';
+
 // Application Service Providers
-import { CoursesService } from './courses/courses.service';
-import { AuthorsService } from './authors/authors.service';
+import { CoursesModel } from './courses/models/courses.model';
 
 // Application Directives
 import { AutoGrowDirective } from './directives/auto-grow.directive';
@@ -31,9 +35,11 @@ import { AutoGrowDirective } from './directives/auto-grow.directive';
 
     // Common Components
     AppComponent,
+    FavouriteComponent,
 
     // Common Directives
     ButtonDirective,
+    FavouriteDirective,
 
     // Application Components
     AuthorsComponent,
@@ -53,10 +59,14 @@ import { AutoGrowDirective } from './directives/auto-grow.directive';
 
     // Common Providers
     HelperService,
+
+    // Application Models
+    AuthorsModel,
+    CoursesModel  
     
     // Application Providers
-    CoursesService, 
-    AuthorsService 
+    
+    
 
    ],
   bootstrap: [AppComponent, CoursesComponent]

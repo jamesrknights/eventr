@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HelperService } from './common/util/helper.service';
+import { HelperService } from './common/services/helper.service';
 
 @Component({
   selector: 'narratones',
