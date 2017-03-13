@@ -1,6 +1,3 @@
-import { Injectable } from '@angular/core';
-
-@Injectable()
 export class HelperService {
     
     /** Checks whether params are either null or undefined */

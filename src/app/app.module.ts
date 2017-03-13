@@ -6,28 +6,21 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Common Components
-import { FavouriteComponent } from './common/components/favourite.component'
-
+import { AppComponent } from './app.component';
+import { FavouriteComponent } from './common/favourite.component';
 // Common Providers
 import { HelperService } from './common/services/helper.service';
-
-// Common Directive 
-import { ButtonDirective } from './common/directives/button.directive';
-import { FavouriteDirective } from './common/directives/favourite.directive';
-
+// Common Directive
+import { InputDirective } from './directives/input.directive'; 
 // Application Components
-import { AppComponent } from './app.component';
+
 import { CoursesComponent } from './courses/courses.component';
 import { AuthorsComponent } from './authors/authors.component';
-
 // Application Models
-import { AuthorsModel } from './authors/models/authors.model';
-
-// Application Service Providers
-import { CoursesModel } from './courses/models/courses.model';
-
+// Application Providers
+import { CourseService } from './courses/services/course.service';
+import { AuthorService } from './authors/services/author.service';
 // Application Directives
-import { AutoGrowDirective } from './directives/auto-grow.directive';
 
 
 @NgModule({
@@ -36,17 +29,16 @@ import { AutoGrowDirective } from './directives/auto-grow.directive';
     // Common Components
     AppComponent,
     FavouriteComponent,
-
+    
     // Common Directives
-    ButtonDirective,
-    FavouriteDirective,
+    InputDirective,
 
     // Application Components
-    AuthorsComponent,
-    CoursesComponent,    
-    
+    CoursesComponent,
+    AuthorsComponent
+
     // Application Directives
-    AutoGrowDirective
+    
 
   ],
   imports: [
@@ -59,16 +51,14 @@ import { AutoGrowDirective } from './directives/auto-grow.directive';
 
     // Common Providers
     HelperService,
-
     // Application Models
-    AuthorsModel,
-    CoursesModel  
     
     // Application Providers
-    
+     CourseService,
+     AuthorService
     
 
    ],
-  bootstrap: [AppComponent, CoursesComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

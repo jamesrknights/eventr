@@ -1,70 +1,36 @@
-import { Component, Input, Renderer, ElementRef } from '@angular/core';
-import { AuthorsModel } from './models/authors.model';
-import { HelperService } from '../common/services/helper.service';
-import { FavouriteComponent } from '../common/components/favourite.component';
-
-
+import { Component, Input, Output } from '@angular/core';
+import { AuthorService } from './services/author.service';
 
 @Component({
-    selector: 'authors',
-    templateUrl: './ui/authors.component.html',
-    styleUrls: ['./ui/authors.component.css']
+    selector : 'authors',
+    templateUrl : './ui/authors.component.html',
+    styleUrls : ['./ui/authors.component.css'],
+    providers : [AuthorService]
 })
 
 export class AuthorsComponent {
 
-    favourite : FavouriteComponent = new FavouriteComponent();
-    model : Object = null;
-    title : String = "";
-    authors : String[] = [];
-    @Input() isFavourite : boolean = false;
+    title : String = "Authors";
+    name : String = "authors";
+    authors;
 
-    constructor (authorModel : AuthorsModel, private helper : HelperService) {
-        this.set("model", authorModel, this);
+    constructor (private service : AuthorService) {
+        this.set("authors", service.get("authors"), this);
     }
 
-    public get (property : String) {
-
-        var result;
-        switch (property) {
-            case "model":
-                result = this.model;
-                break;
-            case "title":
-                result = this.title;
-                break;
-            default:
-                break;
-        }
-        return result;
-    }
-    
     public set (property : String, value, sourceId) {
 
         var changes;
         switch (property) {
-            case "model":
-                this.model = value;
-                console.debug("model is here");
-                console.log(this.model);
-                if (this.helper.isNotNull(value.get("title"))) {
-                    this.title = value.get("title"); 
-                } if (this.helper.isNotNull(value.get("name"))) {
-                    this.authors = value.get("name");
-                } if (this.helper.isNotNull(value.get("authors"))) {
-                    this.authors = value.get("authors");
-                } if (this.helper.isNotNull(value.get("isFavourite"))) {
-                    this.isFavourite = value.get("isFavourite");
-                    this.favourite.set("isFavourite", this.isFavourite, this);
-                }
-
+            case "title":
+                this.title = value;
                 changes = [{
                     property: property,
                     value: value
                 }];
                 break;
-            case "title":
-                this.title = value;
+            case "authors":
+                this.authors = value;
                 changes = [{
                     property: property,
                     value: value
@@ -74,14 +40,9 @@ export class AuthorsComponent {
         return changes;
     }
 
-    setTitle ($event) {
-        if (this.helper.isNotNull($event)) {
-            this.set("title", $event.target.value, this);
-        }
+    onClick ($event) {
+        console.log($event);
+        console.log(this.title)
     }
 
-
-
-
-    
 }

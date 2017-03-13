@@ -1,8 +1,7 @@
-<h1 [textContent]="title"></h1>
-<p [textContent]="name"></p>
-    <input type="text" [value]="title" [(ngModel)]="title" autoGrow />
-    <button commonButton class="btn btn-primary">Button</button>
-    <ul>
-        <li *ngFor="let author of authors" [textContent]="author"></li>
-        <favourite  [isFavourite]="isFavourite"></favourite>
-    </ul>
+<h1>{{title}}</h1>
+<p>{{name}}</p>
+<ul>
+    <input type="text" inputDirective [(ngModel)]="title"/>
+    <li *ngFor="let author of authors">{{author}}</li>
+</ul>
+<button (click)="onClick($event)" class="btn btn-default">OK</button>

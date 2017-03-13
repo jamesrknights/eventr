@@ -1,67 +1,51 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CoursesModel } from './models/courses.model';
-import { HelperService } from '../common/services/helper.service';
-import { FavouriteComponent } from '../common/components/favourite.component';
+import { AppComponent } from '../app.component';
+import { CourseService } from './services/course.service';
 
 @Component({
-  selector: 'courses',
-  templateUrl:'./ui/courses.component.html',
-  styleUrls: ['./ui/courses.component.css']
+    selector : 'courses',
+    templateUrl : './ui/courses.component.html',
+    styleUrls : ['./ui/courses.component.css']
 })
 
-export class CoursesComponent {
-  
-  favourite : FavouriteComponent = new FavouriteComponent();
-  model : Object = null;
-  title : String = "";
-  name : String = "";
-  courses : String[] = [];
+export class CoursesComponent extends AppComponent {
 
-  @Input() isFavourite;
+    title : String = "Courses";
+    name : String = "courses";
+    courses;
 
-  constructor(coursesModel: CoursesModel, private helper : HelperService) {
-    this.set("model", coursesModel, this);
-  }
+    constructor (private service : CourseService) {
+        super();
+        this.setter(service.get("model"), "courses", this);
+    }
 
-  public set (property : String, value, sourceId) {
+    public set (property : String, value, sourceId) {
 
-    var changes;
-    switch (property) {
-      case "model":
-        this.model = value;
-        if (this.helper.isNotNull(value.get("title"))) {
-            this.title = value.get("title"); 
-        } if (this.helper.isNotNull(value.get("name"))) {
-            this.name = value.get("name");
-        } if (this.helper.isNotNull(value.get("courses"))) {
-            this.courses = value.get("courses");
-        } if (this.helper.isNotNull(value.get("isFavourite"))) {
-            this.isFavourite = value.get("isFavourite");                    
-            this.favourite.set("isFavourite", this.isFavourite, this);
+        var changes;
+        switch (property) {
+            case "courses":
+                this.courses = value; 
+            changes = [{
+                property: property,
+                value: value
+            }];
+            this.changed(changes, sourceId);
+            break;
         }
-        changes = [{
-            property: property,
-            value: value
-        }];
-        break;
-      case "isFavourite":
-        this.isFavourite = value;
-        this.favourite.set("isFavourite", this.isFavourite, this);
-        changes = [{
-            property: property,
-            value: value
-        }];
-        break;
+        return changes;
     }
-    return changes;
-  }
 
-  onChange ($event) {
-    if (this.helper.isNotNull($event)) {
-      for (var i = 0, len = $event.length; i <= len; i++) {
-        this.set($event[i]["property"], $event[i]["value"], this);
-      }
+    private onFavouriteChange ($event, course) {
+
+        if (this.helper.isNotNull(course.isFavourite)) {
+            course.isFavourite = !course.isFavourite;
+            this.set("courses", this.courses, this);
+        }
+
     }
-  }
+
+    private onUpdate (changes) {
+        this.service.update(changes);
+    }
 
 }
