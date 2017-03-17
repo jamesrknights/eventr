@@ -1,5 +1,5 @@
 import { Component, Input, Output } from '@angular/core';
-import { AuthorService } from './services/author.service';
+import { AuthorService } from './service/author.service';
 
 @Component({
     selector : 'authors',
@@ -12,10 +12,10 @@ export class AuthorsComponent {
 
     title : String = "Authors";
     name : String = "authors";
-    authors;
+    @Input() authors;
 
     constructor (private service : AuthorService) {
-        this.set("authors", service.get("authors"), this);
+  
     }
 
     public set (property : String, value, sourceId) {
@@ -41,8 +41,7 @@ export class AuthorsComponent {
     }
 
     onClick ($event) {
-        console.log($event);
-        console.log(this.title)
+        
     }
 
 }

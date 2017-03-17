@@ -1,16 +1,19 @@
-import { Component, Input, Renderer, ElementRef, ChangeDetectorRef  } from '@angular/core';
+import { Component, Input, Renderer, ElementRef, ChangeDetectorRef, Output } from '@angular/core';
+import { CommonComponent } from '../common/common.component';
 
 @Component({
     selector : 'favourite', 
     templateUrl : './ui/favourite.component.html',
     styleUrls : ['./ui/favourite.component.css']
 })
-export class FavouriteComponent {
+export class FavouriteComponent extends CommonComponent {
 
     @Input() isFavourite : boolean = false;
     class : String;
+    
 
     constructor (private el : ElementRef, private renderer : Renderer, private cdr : ChangeDetectorRef) {
+        super();
        // this.set("isFavourite", params["isFavourite"], this);
     }
 
@@ -49,10 +52,10 @@ export class FavouriteComponent {
     onClick ($event) {
         this.isFavourite = !this.isFavourite;
         this.setColour();
+        this.changed({property : "isFavourite", value : this.isFavourite}, this);
     }
 
     setColour () {
-
         if (this.isFavourite) {
             this.class = "glyphicon glyphicon-star";
             this.renderer.setElementStyle(this.el.nativeElement, 'color', '#ffd83d');
@@ -61,6 +64,10 @@ export class FavouriteComponent {
             this.renderer.setElementStyle(this.el.nativeElement, 'color', '#989898'); 
         }
 
+    }
+
+    doClass() {
+        alert("changing");
     }
 
 }

@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { AppComponent } from '../app.component';
-import { CourseService } from './services/course.service';
+import { Component, Input, Output, EventEmitter, Inject, ChangeDetectorRef } from '@angular/core';
+import { CommonComponent } from '../common/common.component';
+import { CourseModel } from './model/course.model';
 
 @Component({
     selector : 'courses',
@@ -8,15 +8,15 @@ import { CourseService } from './services/course.service';
     styleUrls : ['./ui/courses.component.css']
 })
 
-export class CoursesComponent extends AppComponent {
+export class CoursesComponent extends CommonComponent {
 
-    title : String = "Courses";
-    name : String = "courses";
-    courses;
+    private title : String = "Courses";
+    private name : String = "";
+    @Input() courses : CourseModel;
+    
 
-    constructor (private service : CourseService) {
+    constructor (private cdr : ChangeDetectorRef) {
         super();
-        this.setter(service.get("model"), "courses", this);
     }
 
     public set (property : String, value, sourceId) {
@@ -37,6 +37,7 @@ export class CoursesComponent extends AppComponent {
 
     private onFavouriteChange ($event, course) {
 
+        console.log("courses", $event);
         if (this.helper.isNotNull(course.isFavourite)) {
             course.isFavourite = !course.isFavourite;
             this.set("courses", this.courses, this);
@@ -44,8 +45,9 @@ export class CoursesComponent extends AppComponent {
 
     }
 
-    private onUpdate (changes) {
-        this.service.update(changes);
-    }
+    onCourseSelect ($event, course) {
+        console.log("clicked courses", course);
+        this.clicked($event, course);
+    } 
 
 }
