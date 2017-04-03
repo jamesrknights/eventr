@@ -1,5 +1,28 @@
 # Narratones
 
+This project is the Angular 2 Application, which incorporates the same priniciples as Eventr Back. This application uses DWR to connect with the Java Backend.
+The project is described as below: 
+
+# Models
+
+   - Objects used to represent Data, extending Common Model
+
+# Controllers (Components)
+
+   - Objects consisting of Logic
+
+# Common Entities
+
+   - Common Entities which are used app wide (Common Datasource, Model, Component) - These are 'wrapper' classes and are 'private', implementation of these have been done within components/models etc that extend the functionality they are implementing
+
+# Handlers
+
+   - Objects which handle a certain type of event for a certain type of entity.  
+
+# Datasource
+
+   - Object which describes the connectivity and interaction with the backend service. Portal is the implementation of Datasource for this particular application. 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.31.
 
 ## Development server
